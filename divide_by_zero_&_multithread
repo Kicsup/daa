@@ -1,0 +1,101 @@
+package program3.exception;
+public class Division {
+private float n1;
+private float n2;
+public Division(float n1, float n2) {
+super();
+this.n1 = n1;
+this.n2 = n2;
+}
+public float computeDiv() {
+if (n2 == 0) {
+throw new ArithmeticException("/ by zero");
+} else {
+return (n1 / n2);
+}
+}
+}
+package program3.exception;
+import java.util.Scanner;
+public class ExceptionDemo {
+public static void main(String[] args) {
+Scanner s = new Scanner(System.in);
+System.out.println("Enter numerator: ");
+int n1 = s.nextInt();
+System.out.println("Enter denominator: ");
+int n2 = s.nextInt();
+Division div = new Division(n1, n2);
+try {
+float result = div.computeDiv();
+System.out.println("Result: " + result);
+} catch (ArithmeticException e) {
+e.printStackTrace();
+}
+}
+}
+
+
+
+//-------------------------------------------3b.------------------------------------------
+
+import java.util.*;
+class Cube implements Runnable
+{
+public int x;
+public Cube (int x)
+{
+this.x=x;
+}
+public void run()
+{
+System.out.println("From third thread-Cube of" + x + "is:" +x*x*x);
+}
+}
+class Square implements Runnable
+{
+public int x;
+public Square (int x)
+{
+this.x=x;
+}
+public void run()
+{
+System.out.println("From second thread-Square of" + x + "is:" +x*x);
+}
+}
+class FirstThreadIsRandom extends Thread
+{
+public void run()
+{
+int num=0;
+Random r= new Random();
+try
+{
+for(int i=0;i<5;i++)
+{
+num=r.nextInt(100);
+System.out.println("Main Thread Started and Generated Number
+is"+num);
+Thread t2 = new Thread(new Square (num));
+t2.start();
+Thread t3 = new Thread (new Cube(num));
+t3.start();
+Thread.sleep(1000);
+System.out.println("-------------------------------------------------");
+}
+}
+catch (Exception ex)
+{
+System.out.println(ex.getMessage());
+}
+}
+}
+public class MultiThreaded
+{
+public static void main(String[] args)
+{
+FirstThreadIsRandom firstThread = new FirstThreadIsRandom();
+Thread t1 = new Thread (firstThread);
+t1.start();
+}
+}
