@@ -1,0 +1,126 @@
+import java.util.Scanner;
+public class Student
+{
+private String usn, name, branch, phone;
+public Student(String usn, String name, String branch, String phone)
+{
+super();
+this.usn = usn;
+this.name = name;
+this.branch = branch;
+this.phone = phone;
+}
+@Override
+public String toString()
+{
+return "Student [USN = " + usn + ", NAME = " + name + ", BRANCH = " + branch
++ ", PHONE NUMBER = " + phone + "]";
+}
+public static void main(String args[])
+{
+int i;
+String usn, branch, name, phone;
+Scanner s = new Scanner(System.in);
+System.out.println("Enter number of Students: ");
+int n = s.nextInt();
+Student[] students = new Student[n + 1];
+for(i = 1; i<= n; i ++)
+{
+System.out.println("Enter student "+ i +" details\n");
+System.out.println("Give Student Details USN, Name, Branch, Phone Number");
+usn = s.next();
+name = s.next();
+branch = s.next();
+phone = s.next();
+students[i] = new Student(usn, name, branch, phone);
+}
+System.out.println("DATABASE:");
+for(i = 1; i <= n; i ++)
+{
+System.out.println(students[i]);
+}
+}
+}
+
+//--------------------------1b.--------------------------------------------------------------------------------------
+
+
+package program1.stack;
+public class MyStack {
+private int[] stk;
+private int top;
+private int maxSize;
+public MyStack(int maxSize) {
+this.stk = new int[maxSize];
+this.top = -1;
+this.maxSize = maxSize;
+}
+boolean isStackFull() {
+return (top == maxSize - 1);
+}
+boolean isStackEmpty() {
+return (top == -1);
+}
+public void push(int item) {
+this.stk[++top] = item;
+}
+public int pop() {
+return (this.stk[top--]);
+}
+public void displayStack() {
+System.out.println("The Stack Items are ...");
+for (int i = this.top; i >= 0; --i) {
+System.out.println(this.stk[i]);
+}
+}
+}
+package program1.stack;
+import java.util.Scanner;
+public class MyStackDemo {
+public static void main(String[] args) {
+Scanner s = new Scanner(System.in);
+System.out.println("Enter Stack Size: ");
+int maxSize = s.nextInt();
+MyStack stk = new MyStack(maxSize);
+System.out.println(
+"Stack operations are" + "\n" + "1.Push" + "\t" +
+"2.POP" + "\t" + "3.Display" + "\t" + "4.Exit");
+for (;;) {
+System.out.println("\nEnter your choice: ");
+int ch = s.nextInt();
+switch (ch) {
+case 1:
+if (stk.isStackFull()) {
+System.out.println("Stack is Overflow");
+} 
+else {
+System.out.println("Enter an Item to be
+pushed: ");
+int ele = s.nextInt();
+stk.push(ele);
+}
+break;
+case 2:
+if (stk.isStackEmpty()) {
+System.out.println("Stack is Underflow");
+} 
+else {
+System.out.println("Popped Item: " +
+stk.pop());
+}
+break;
+case 3:
+if (stk.isStackEmpty()) {
+System.out.println("Stack is Empty");
+} 
+else {
+stk.displayStack();
+}
+break;
+case 4:
+System.exit(0);
+break;
+}
+}
+}
+}
